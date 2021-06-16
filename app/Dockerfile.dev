@@ -1,0 +1,8 @@
+FROM node:14-alpine As development
+WORKDIR /home/node
+COPY *.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+ENV NODE_ENV=development
+CMD [ "npm", "run", "start:dev"]
