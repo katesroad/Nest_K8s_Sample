@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-prod-depl
+spec:
+  selector:
+    matchLabels:
+      app: app-prod
+  template:
+    metadata:
+      labels:
+        app: app-prod
+    spec:
+      containers:
+        - name: app-prod
+          image: dockeridohyeah/cicd-prod:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

@@ -1,0 +1,21 @@
+apiVersion: skaffold/v2beta15
+kind: Config
+metadata:
+  name: cicd
+build:
+  artifacts:
+  - image: dockeridohyeah/cicd-dev
+    context: app
+    docker:
+      dockerfile: Dockerfile.dev
+  - image: dockeridohyeah/cicd-prod
+    context: app
+    docker:
+      dockerfile: Dockerfile.prod
+deploy:
+  kubectl:
+    manifests:
+    - infra/k8s/app-dev-depl.yaml
+    - infra/k8s/app-prod-depl.yaml
+    - infra/k8s/mongo-dev-depl.yaml
+    - infra/k8s/mongo-prod-depl.yaml
